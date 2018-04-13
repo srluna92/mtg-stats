@@ -1,2 +1,5 @@
-<mat-toolbar color="primary"></mat-toolbar>
+<mat-toolbar color="primary">
+  <div fxFlex></div>
+  <button mat-button (click)="logout()" *ngIf="user">Logout</button>
+</mat-toolbar>
 <router-outlet></router-outlet>

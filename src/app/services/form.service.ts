@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+
+const cardForm = /^\d{11}(\d{5})?$/; // /^4300\d{12}$/;
+const pointValue = /^\d+(?:[\.]\d{2})?$/;
+const emailForm = /(?:^[\w\d!|#|$|&|'|\*|\+|\-|\/|=|\?|`|{|\|}|~]+)(?:(\.[\d\w!|#|$|&|'|\*|\+|\-|\/|=|\?|`|{|\|}|~]+)*\@)(?:[a-zA-Z0-9]([a-zA-Z-]{0,61}[a-zA-Z0-9])?)([^\s!|#|$|&|'|\*|\+|\-|\/|=|\?|`|{|\|}|~@]*)(?:\.[a-zA-Z]{2,}$)/;
+
+@Injectable()
+export class FormService {
+  fb: FormBuilder = new FormBuilder();
+
+  loginForm(): FormGroup {
+    return this.fb.group({
+      'username': ['', [Validators.required, Validators.pattern(emailForm)]],
+      'password': ['', Validators.required]
+    });
+  }
+  constructor() { }
+
+}

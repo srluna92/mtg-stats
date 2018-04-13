@@ -48,7 +48,7 @@ export class OverviewComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Deck>(d);
       this.decks = d;
     });
-    this.fire.retrieveDecks('sluna');
+    this.fire.retrieveDecks();
     this.fire.retrieveFormat();
   }
 

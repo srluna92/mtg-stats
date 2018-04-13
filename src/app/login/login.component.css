@@ -1,0 +1,10 @@
+.mat-card {
+  margin: 1%;
+  
+}
+.mat-form-field {
+  width: 100%;
+}
+.mat-card-content, .mat-card-actions {
+  place-content: center;
+}
