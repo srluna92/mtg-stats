@@ -13,21 +13,13 @@ export class LoginService {
 
   login(u: string, p: string): Promise<void | Observable<any>> {
     return firebase.auth().signInWithEmailAndPassword(u, p).then(s => {
-      if (s) {
-        this.router.navigateByUrl('overview');
-      }
-    }).catch(e => {
-      return of(e);
-    });
+      this.router.navigateByUrl('overview');
+    }).catch(e => of(e));
   }
   signUp(u: string, p: string): Promise<void | Observable<any>> {
     return firebase.auth().createUserWithEmailAndPassword(u, p).then(s => {
-        if (s) {
-          this.router.navigateByUrl('overview');
-        }
-    }).catch(e => {
-      return of(e);
-    });
+      this.router.navigateByUrl('overview');
+    }).catch(e => of(e));
   }
   logout() {
     firebase.auth().signOut().then(r => this.router.navigateByUrl('login'));
@@ -40,21 +32,14 @@ export class LoginService {
       provider = new firebase.auth.TwitterAuthProvider();
     }
     return firebase.auth().signInWithPopup(provider).then(r => {
-      if (r) {
-        this.router.navigateByUrl('overview');
-      }
-    }).catch(e => {
-      return of(e);
-    });
+      this.router.navigateByUrl('overview');
+    }).catch(e => of(e));
   }
   authUser(): void {
-    firebase.auth().onAuthStateChanged(u => {
-      this.user.next(u);
-    });
+    firebase.auth().onAuthStateChanged(u => this.user.next(u));
   }
   constructor(
     private fire: AngularFirestore,
     private router: Router
   ) { }
-
 }
