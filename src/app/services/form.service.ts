@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 const cardForm = /^\d{11}(\d{5})?$/; // /^4300\d{12}$/;
 const pointValue = /^\d+(?:[\.]\d{2})?$/;
-const emailForm = /(?:^[\w\d!|#|$|&|'|\*|\+|\-|\/|=|\?|`|{|\|}|~]+)(?:(\.[\d\w!|#|$|&|'|\*|\+|\-|\/|=|\?|`|{|\|}|~]+)*\@)(?:[a-zA-Z0-9]([a-zA-Z-]{0,61}[a-zA-Z0-9])?)([^\s!|#|$|&|'|\*|\+|\-|\/|=|\?|`|{|\|}|~@]*)(?:\.[a-zA-Z]{2,}$)/;
+const emailForm = /(?:^[\w\d!|#|$|&|\'|\*|\+|\-|\/|=|\?|`|{|\|}|~]+)(?:(\.[\d\w!|#|$|&|\'|\*|\+|\-|\/|=|\?|`|{|\|}|~]+)*\@)(?:[a-zA-Z0-9]([a-zA-Z-]{0,61}[a-zA-Z0-9])?)([^\s!|#|$|&|\'|\*|\+|\-|\/|=|\?|`|{|\|}|~@]*)(?:\.[a-zA-Z]{2,}$)/;
 
 @Injectable()
 export class FormService {

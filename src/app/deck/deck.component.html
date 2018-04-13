@@ -26,13 +26,13 @@
       </mat-expansion-panel-header>
       <mat-card-content fxLayout="column">
         <mat-card-content fxLayout="row">
-          <mat-form-field>
+          <mat-form-field fxFlex>
             <input matInput placeholder="Opponent's Deck" [(ngModel)]="match.name">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field fxFlex>
             <input matInput placeholder="Location" [(ngModel)]="match.location">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field fxFlex>
             <input matInput [matDatepicker]="picker" placeholder="Date" [(ngModel)]="match.date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -41,7 +41,7 @@
         <mat-card-subtitle fxLayout="row">
           Games
           <div fxFlex></div>
-          <mat-icon (click)="addGame(i)" color="primary">add</mat-icon>
+          <button mat-icon-button (click)="addGame(i)"><mat-icon color="primary">add_circle</mat-icon></button>
         </mat-card-subtitle>
         <mat-card-content fxLayout="row">
           <div class="mat-table">
@@ -49,22 +49,21 @@
               <div class="mat-header-cell">Play/Draw</div>
               <div class="mat-header-cell">Result</div>
             </div>
-            <div class="mat-row" *ngFor="let game of match.games">
+            <div class="mat-row" *ngFor="let game of match.games; let j = index">
               <div class="mat-cell">
-                <mat-form-field>
-                  <mat-select matInput [(ngModel)]="game.type">
-                    <mat-option value="1">Play</mat-option>
-                    <mat-option value="0">Draw</mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <mat-radio-group [(ngModel)]="game.type">
+                  <mat-radio-button value="1">Play</mat-radio-button>
+                  <mat-radio-button value="0">Draw</mat-radio-button>
+                </mat-radio-group>
               </div>
               <div class="mat-cell">
-                <mat-form-field>
-                  <mat-select matInput [(ngModel)]="game.result">
-                    <mat-option value="1">Win</mat-option>
-                    <mat-option value="0">Loss</mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <mat-radio-group [(ngModel)]="game.result">
+                  <mat-radio-button value="1">Win</mat-radio-button>
+                  <mat-radio-button value="0">Loss</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="mat-cell">
+                <button mat-icon-button (click)="removeGame(i, j)"><mat-icon color="warn">remove</mat-icon></button>
               </div>
             </div>
           </div>

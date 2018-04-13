@@ -13,7 +13,7 @@ export class OverviewComponent implements OnInit {
   headerCol = ['Deck', 'Format', 'Wins', 'Win on Draw', 'Win on Play', 'Total Games'];
   dataSource = new MatTableDataSource<Deck>(null);
   decks: Deck[];
-  selectedDeck = new Deck();
+  selectedDeck: Deck;
 
   newDeck(): void {
     this.decks.push(new Deck());
@@ -34,7 +34,21 @@ export class OverviewComponent implements OnInit {
     let data = this.dataSource.data;
     data = (!sort.active || !sort.direction) ? data : data.sort((a, b) => {
       const asc = sort.direction === 'asc' ? 1 : -1;
-      return (a[sort.active] < b[sort.active] ? -1 : 1) * asc;
+      let val = '';
+      switch (sort.active) {
+        case 'Deck': val = 'name'; break;
+        case 'Format': val = 'format'; break;
+        case '% Wins': val = 'percentWin'; break;
+        case '% Wins on Draw': val = 'percentDraw'; break;
+        case '% Wins on Play': val = 'percentPlay'; break;
+        case 'Total Games': val = 'games'; break;
+      }
+      switch (val) {
+        case 'percentWin': return ((a.winsPlay + a.winsDraw) / a.games) < ((b.winsPlay + b.winsDraw) / b.games) ? -1 : 1 * asc;
+        case 'percentDraw': return ((a.winsDraw / a.games) < (b.winsDraw / b.games) ? -1 : 1) * asc;
+        case 'percentPlay': return ((a.winsPlay / a.games) < (b.winsPlay / b.games) ? -1 : 1) * asc;
+        default: return (a[val] < b[val] ? -1 : 1) * asc;
+      }
     });
     this.dataSource = new MatTableDataSource<Deck>(data);
   }

@@ -4,3 +4,6 @@
 .mat-card-subtitle {
   margin-bottom: 0px;
 }
+.mat-cell {
+  overflow: visible;
+}

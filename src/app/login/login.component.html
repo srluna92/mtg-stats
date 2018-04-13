@@ -2,7 +2,7 @@
   <mat-card-content fxLayout="column">
     <mat-card-content fxLayout="row">
       <mat-form-field fxFlex="60">
-        <input matInput placeholder="Email" [(ngModel)]="username" [formControl]="loginControl.controls['username']">
+        <input matInput placeholder="Email" [(ngModel)]="username" [formControl]="loginControl.controls['username']" type="email">
         <mat-error *ngIf="loginControl.controls['username'].hasError('required')">
           Email is <strong>required</strong>
         </mat-error>
