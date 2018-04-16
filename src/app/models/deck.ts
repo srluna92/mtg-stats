@@ -11,4 +11,5 @@ export class Deck {
   winsDraw: number;
   matches: Match[];
   deckList: Card[];
+  colors: string[];
 }

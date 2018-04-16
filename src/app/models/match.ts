@@ -9,4 +9,5 @@ export class Match {
   notes: string;
   location: string;
   date: string;
+  competitve: boolean;
 }

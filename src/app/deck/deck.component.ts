@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Deck } from '../models/deck';
 import { Match } from '../models/match';
 import { FireService } from '../services/fire.service';
 import { Game } from '../models';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-deck',
@@ -11,41 +12,52 @@ import { Game } from '../models';
 })
 export class DeckComponent implements OnInit {
 
-  @Input() deck: Deck;
+  deck: Deck;
   format: string[];
+  Games: Game[];
 
   addMatch(): void {
     this.deck.matches = this.deck.matches ? this.deck.matches : new Array<Match>();
     const m = new Match();
+    m.games = new Array<Game>();
     m.name = 'New Match';
     this.deck.matches.push(m);
   }
   addGame(i: number): void {
-    this.deck.matches[i].games = this.deck.matches[i].games ? this.deck.matches[i].games : new Array<Game>();
     this.deck.matches[i].games.push(new Game());
   }
-  removeGame(i: number, j: number): void {
-    this.deck.matches[i].games.slice(j, 1);
+  removeGame(m: number, g: number): void {
+    this.deck.matches[m].games.slice(g, 1);
+  }
+  addDeck(e: any) {
+    const fr = new FileReader();
+    let dL: any;
+    fr.onload = function(ie: any) {
+      dL = ie.target.result;
+    };
+    fr.readAsText(e.target.files[0]);
+    console.log(dL);
   }
   update(): void {
+    const obj = [0, 0, 0];
     this.deck.matches.forEach(match => {
       match.games.forEach(game => {
-        switch (game.type) {
-          case 0 : this.deck.winsDraw += game.result; break;
-          case 1 : this.deck.winsPlay += game.result; break;
-          default: break;
-        }
+        obj[game.type] += +game.result;
       });
-      this.deck.games += match.games.length;
+      obj[2] += +match.games.length;
     });
-    this.fire.updateDeck(this.deck);
+    this.deck.games = obj[2];
+    this.deck.winsDraw = obj[0];
+    this.deck.winsPlay = obj[1];
+    this.fire.updateDeck(this.deck, true);
   }
   constructor(
-    private fire: FireService
+    private fire: FireService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.deck = this.deck ? this.deck : new Deck();
+    this.fire.currentDeck.asObservable().subscribe(d => this.deck = d);
     this.fire.format.asObservable().subscribe(f => this.format = f);
   }
 

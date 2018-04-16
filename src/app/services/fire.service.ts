@@ -13,10 +13,18 @@ export class FireService {
   decks = new BehaviorSubject<Deck[]>(new Array<Deck>());
   matches = new BehaviorSubject<Match[]>(new Array<Match>());
   format = new BehaviorSubject<string[]>(new Array<string>());
+  currentDeck = new BehaviorSubject<Deck>(new Deck());
 
   retrieveDecks() {
     this.fire.collection('users').doc(this.loginService.user.getValue().email).collection('decks').valueChanges().subscribe((d: Deck[]) => {
       this.decks.next(d);
+    });
+  }
+  retrieveDeckByName(name: string) {
+    console.log(name);
+    this.fire.collection('users').doc(this.loginService.user.getValue().email).collection('decks')
+      .doc('name').valueChanges().subscribe((d: Deck) => {
+        this.currentDeck.next(d);
     });
   }
   updateDeck(deck: Deck, m?: boolean): void {
