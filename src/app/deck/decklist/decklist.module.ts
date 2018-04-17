@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '../material.module';
-import { DeckComponent } from './deck.component';
-import { DecklistModule } from './decklist/decklist.module';
+import { MaterialModule } from '../../material.module';
+import { DecklistComponent } from './decklist.component';
 
 @NgModule({
   imports: [
@@ -12,10 +11,9 @@ import { DecklistModule } from './decklist/decklist.module';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    DecklistModule
+    MaterialModule
   ],
-  declarations: [DeckComponent],
-  exports: [DeckComponent]
+  declarations: [DecklistComponent],
+  exports: [DecklistComponent]
 })
-export class DeckModule { }
+export class DecklistModule { }

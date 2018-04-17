@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Deck } from '../models/deck';
-import { Match } from '../models/match';
 import { FireService } from '../services/fire.service';
-import { Game } from '../models';
+import { Game, Card, Deck, Match } from '../models';
 import { ActivatedRoute } from '@angular/router';
+import { forEach } from '@firebase/util';
+import { CardService } from '../services/card.service';
 
 @Component({
   selector: 'app-deck',
@@ -29,15 +29,6 @@ export class DeckComponent implements OnInit {
   removeGame(m: number, g: number): void {
     this.deck.matches[m].games.slice(g, 1);
   }
-  addDeck(e: any) {
-    const fr = new FileReader();
-    let dL: any;
-    fr.onload = function(ie: any) {
-      dL = ie.target.result;
-    };
-    fr.readAsText(e.target.files[0]);
-    console.log(dL);
-  }
   update(): void {
     const obj = [0, 0, 0];
     this.deck.matches.forEach(match => {
@@ -53,12 +44,14 @@ export class DeckComponent implements OnInit {
   }
   constructor(
     private fire: FireService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cardService: CardService
   ) { }
 
   ngOnInit() {
     this.fire.currentDeck.asObservable().subscribe(d => this.deck = d);
     this.fire.format.asObservable().subscribe(f => this.format = f);
+    this.fire.retrieveCards();
   }
 
 }

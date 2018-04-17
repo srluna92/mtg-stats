@@ -3,7 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import { forEach } from '@firebase/util';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { User, Match, Deck } from '../models/index';
+import { User, Match, Deck, Card } from '../models/index';
 import { CollectionReference, DocumentReference } from '@firebase/firestore-types';
 import { LoginService } from './login.service';
 
@@ -12,6 +12,7 @@ export class FireService {
 
   decks = new BehaviorSubject<Deck[]>(new Array<Deck>());
   matches = new BehaviorSubject<Match[]>(new Array<Match>());
+  cards = new BehaviorSubject<Card[]>(new Array<Card>());
   format = new BehaviorSubject<string[]>(new Array<string>());
   currentDeck = new BehaviorSubject<Deck>(new Deck());
 
@@ -41,6 +42,14 @@ export class FireService {
     this.fire.collection('formats').doc('format').valueChanges().subscribe((f: any) => {
       this.format.next(f.formats ? f.formats : []);
     });
+  }
+  retrieveCards(): void {
+    this.fire.collection('cards').valueChanges().subscribe((c: Card[]) => {
+      this.cards.next(c);
+    });
+  }
+  updateCards(): void {
+    this.fire.collection('cards').add(this.cards.getValue());
   }
   constructor(
     private fire: AngularFirestore,

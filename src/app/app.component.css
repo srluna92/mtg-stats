@@ -1,0 +1,8 @@
+.mat-elevation-z6 {
+  z-index: 2;
+  position: relative;
+  margin-bottom: 3%;
+}
+.mat-card {
+  margin: 1% !important;
+}

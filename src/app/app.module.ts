@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
 import { OverviewModule } from './overview/overview.module';
-import { FireService, LoginService, AuthService, FormService, LoginAuthService } from './services/index.service';
+import { FireService, LoginService, AuthService, FormService, LoginAuthService, CardService } from './services/index.service';
 import { LoginModule } from './login/login.module';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { LoginModule } from './login/login.module';
     OverviewModule,
     LoginModule
   ],
-  providers: [AuthService, FireService, FormService, LoginService, LoginAuthService],
+  providers: [AuthService, FireService, FormService, LoginService, LoginAuthService, CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z6">
   <div fxFlex></div>
+  <button mat-button routerLink="/overview" *ngIf="user">Overview</button>
   <button mat-button (click)="logout()" *ngIf="user">Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

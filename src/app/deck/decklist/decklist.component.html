@@ -1,0 +1,25 @@
+<mat-card-content fxLayout="row">
+  Sort By:
+  <mat-radio-group [(ngModel)]="sort" (ngModelChange)="sortDeck()">
+    <mat-radio-button value="name">Name</mat-radio-button>
+    <mat-radio-button value="cmc">CMC</mat-radio-button>
+    <mat-radio-button value="type">Type</mat-radio-button>
+    <mat-radio-button value="color">Color</mat-radio-button>
+  </mat-radio-group>
+</mat-card-content>
+<mat-card-content><mat-card-title>MainBoard</mat-card-title></mat-card-content>
+<mat-card-content fxLayout="row" *ngFor="let c of deck.deckList">
+  <div *ngIf="c.main">
+    <div>{{c.amount}}x</div>
+    <div><span matTooltip="c.img" matTooltipShowDisplay="500" *ngIf="c.img">{{c.name}}</span></div>
+  </div>
+</mat-card-content>
+<mat-card-content><mat-card-title>Side Board</mat-card-title></mat-card-content>
+<mat-card-content fxLayout="row" *ngFor="let c of deck.deckList">
+  <div *ngIf="!c.main">
+    <div>{{c.amount}}x</div>
+    <div><span matTooltip="c.img" matTooltipShowDisplay="500" *ngIf="c.img">{{c.name}}</span></div>
+  </div>
+</mat-card-content>
+<input type="file" (change)="addDeck($event)" [hidden]="true" id="dek">
+<label for="dek" class="mat-raised-button mat-primary mat-button">Select Deck</label>

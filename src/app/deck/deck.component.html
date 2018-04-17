@@ -1,15 +1,8 @@
 <mat-card-content fxLayout="row">
-  <mat-card-content fxLayout="column">
-    <mat-card-content fxLayout="row">
-      <mat-card-title>MainBoard</mat-card-title>
-      <input type="file" (change)="addDeck($event)">
-    </mat-card-content>
-    <mat-card-content fxLayout="row" *ngFor="let c of deck.deckList">
-      <div>{{c.amount}}x</div>
-      <div><span matTooltip="c.img" matTooltipShowDisplay="500">{{c.name}}</span></div>
-    </mat-card-content>
-  </mat-card-content>
-  <mat-card-content fxLayout="column">
+  <mat-card fxLayout="column" *ngIf="deck.deckList">
+    <app-decklist [deckList]="deck.deckList"></app-decklist>
+  </mat-card>
+  <mat-card fxLayout="column">
     <mat-card-content fxLayout="row">
       <mat-form-field fxFlex="35">
         <input matInput placeholder="Deck Name" [(ngModel)]="deck.name">
@@ -25,7 +18,6 @@
     </mat-card-content>
     <mat-card-subtitle fxLayout="row">
       Matches
-      <div fxFlex></div>
       <button mat-icon-button (click)="addMatch()"><mat-icon color="primary">add_circle</mat-icon></button>
     </mat-card-subtitle>
   
@@ -51,7 +43,6 @@
           </mat-card-content>
           <mat-card-subtitle fxLayout="row">
             Games
-            <div fxFlex></div>
             <button mat-icon-button (click)="addGame(i)"><mat-icon color="primary">add_circle</mat-icon></button>
           </mat-card-subtitle>
           <mat-card-content fxLayout="row">
@@ -83,5 +74,5 @@
         </mat-card-content>
       </mat-expansion-panel>
     </mat-accordion>
-  </mat-card-content>
+  </mat-card>
 </mat-card-content>
