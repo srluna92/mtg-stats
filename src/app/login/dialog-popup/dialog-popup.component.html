@@ -1,0 +1,7 @@
+<mat-card-content>
+  A reset form will be sent to the address entered below.
+  <mat-form-field>
+    <input matInput type="email" placeholder="Enter Email" [(ngModel)]="email" [formControl]="resetForm">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="resetPassword()" [disabled]="!resetForm.valid">Reset</button>
+</mat-card-content>

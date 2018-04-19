@@ -33,7 +33,9 @@ export class DeckComponent implements OnInit {
     const obj = [0, 0, 0];
     this.deck.matches.forEach(match => {
       match.games.forEach(game => {
-        obj[game.type] += +game.result;
+        if (game.type !== null && game.result !== null) {
+          obj[game.type] += +game.result;
+        }
       });
       obj[2] += +match.games.length;
     });

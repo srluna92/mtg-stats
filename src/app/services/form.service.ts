@@ -13,8 +13,11 @@ export class FormService {
   loginForm(): FormGroup {
     return this.fb.group({
       'username': ['', [Validators.required, Validators.pattern(emailForm)]],
-      'password': ['', Validators.required]
+      'password': ['', Validators.required],
     });
+  }
+  resetForm(): FormControl {
+    return new FormControl('', {validators: [Validators.required, Validators.pattern(emailForm)]});
   }
   constructor() { }
 

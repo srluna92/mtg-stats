@@ -8,3 +8,6 @@
 .mat-card-content, .mat-card-actions {
   place-content: center;
 }
+.mat-tab-body-content {
+  overflow: hidden !important;
+}

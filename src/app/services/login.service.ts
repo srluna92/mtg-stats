@@ -35,6 +35,13 @@ export class LoginService {
       this.router.navigateByUrl('overview');
     }).catch(e => of(e));
   }
+  resetPassword(email: string): Promise<void | Observable<any>> {
+    return firebase.auth().sendPasswordResetEmail(email).then(s => {
+      console.log(s);
+    }).catch(e => {
+      console.log(e);
+    });
+  }
   authUser(): void {
     firebase.auth().onAuthStateChanged(u => this.user.next(u));
   }

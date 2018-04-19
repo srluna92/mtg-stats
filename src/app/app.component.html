@@ -3,4 +3,6 @@
   <button mat-button routerLink="/overview" *ngIf="user">Overview</button>
   <button mat-button (click)="logout()" *ngIf="user">Logout</button>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<div class="scrollable-content">
+  <router-outlet></router-outlet>
+</div>

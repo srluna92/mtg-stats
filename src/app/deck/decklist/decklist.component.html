@@ -1,25 +1,45 @@
-<mat-card-content fxLayout="row">
-  Sort By:
-  <mat-radio-group [(ngModel)]="sort" (ngModelChange)="sortDeck()">
-    <mat-radio-button value="name">Name</mat-radio-button>
-    <mat-radio-button value="cmc">CMC</mat-radio-button>
-    <mat-radio-button value="type">Type</mat-radio-button>
-    <mat-radio-button value="color">Color</mat-radio-button>
-  </mat-radio-group>
-</mat-card-content>
-<mat-card-content><mat-card-title>MainBoard</mat-card-title></mat-card-content>
-<mat-card-content fxLayout="row" *ngFor="let c of deck.deckList">
-  <div *ngIf="c.main">
-    <div>{{c.amount}}x</div>
-    <div><span matTooltip="c.img" matTooltipShowDisplay="500" *ngIf="c.img">{{c.name}}</span></div>
-  </div>
-</mat-card-content>
-<mat-card-content><mat-card-title>Side Board</mat-card-title></mat-card-content>
-<mat-card-content fxLayout="row" *ngFor="let c of deck.deckList">
-  <div *ngIf="!c.main">
-    <div>{{c.amount}}x</div>
-    <div><span matTooltip="c.img" matTooltipShowDisplay="500" *ngIf="c.img">{{c.name}}</span></div>
-  </div>
-</mat-card-content>
-<input type="file" (change)="addDeck($event)" [hidden]="true" id="dek">
-<label for="dek" class="mat-raised-button mat-primary mat-button">Select Deck</label>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title *ngIf="deckList">View Deck List</mat-panel-title>
+      <mat-panel-title *ngIf="!deckList">Add Deck List</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card-content *ngIf="deckList">
+      <mat-card-subtitle>Sort By</mat-card-subtitle>
+      <mat-card-content>
+        <mat-radio-group [(ngModel)]="sort" (ngModelChange)="sortDeck()">
+          <mat-radio-button value="name">Name</mat-radio-button>
+          <mat-radio-button value="cmc">CMC</mat-radio-button>
+          <mat-radio-button value="type">Type</mat-radio-button>
+          <mat-radio-button value="color">Color</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+      <mat-card-content>
+        <mat-card-subtitle>Main Board</mat-card-subtitle>
+        <mat-card-content *ngFor="let card of deckList" class="deckList">
+          <div *ngIf="card.main">
+            <div [innerHTML]="card.amount"></div>
+            <div *ngIf="card.img"><span matTooltip="c.img" matTooltipShowDisplay="500" [innerHTML]="card.name"></span></div>
+            <div *ngIf="!card.img" [innerHTML]="card.name"></div>
+          </div>
+        </mat-card-content>
+      </mat-card-content>
+      <mat-card-content>
+        <mat-card-subtitle>Side Board</mat-card-subtitle>
+        <mat-card-content *ngFor="let card of deckList">
+          <mat-card-content *ngFor="let card of deckList" class="deckList">
+            <div *ngIf="!card.main">
+              <div [innerHTML]="card.amount"></div>
+              <div *ngIf="card.img"><span matTooltip="c.img" matTooltipShowDisplay="500" [innerHTML]="card.name"></span></div>
+              <div *ngIf="!card.img" [innerHTML]="card.name"></div>
+            </div>
+          </mat-card-content>
+        </mat-card-content>
+      </mat-card-content>
+    </mat-card-content>
+    <mat-card-content>
+      <input type="file" (change)="addDeck($event)" [hidden]="true" id="dek">
+      <label for="dek" class="mat-raised-button mat-primary mat-button">Select Deck</label>
+    </mat-card-content>
+  </mat-expansion-panel>
+</mat-accordion>

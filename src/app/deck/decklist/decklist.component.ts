@@ -65,6 +65,37 @@ export class DecklistComponent implements OnInit {
     private cardService: CardService
   ) { }
 
-  ngOnInit() { }
-
+  ngOnInit() {
+    this.deckList = this.deckList ? this.deckList : [{
+      amount: 1,
+      name: 'Black Lotus',
+      img: null,
+      type: 'artifact',
+      cmc: '0',
+      colors: ['colorless'],
+      main: true,
+      errorCode: null,
+      errorMessage: null
+    }, {
+      amount: 1,
+      name: 'Squee',
+      img: null,
+      type: 'creature',
+      cmc: '3',
+      colors: ['red'],
+      main: false,
+      errorCode: null,
+      errorMessage: null
+    }, {
+      amount: 1,
+      name: 'Squee',
+      img: null,
+      type: 'creature',
+      cmc: '3',
+      colors: ['red'],
+      main: true,
+      errorCode: null,
+      errorMessage: null
+    }];
+  }
 }
