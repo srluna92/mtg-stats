@@ -9,21 +9,27 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class CardService {
 
-  getCards(text: string): void {
+  getCards(text: string): Array<Card> {
     const cards = new Array<Card>();
     if (!text || text.split('\n').length > 80) {
       return;
     }
     let main = true;
-    forEach(text.split('\n'), (line: string) => {
+    text.split('\n').forEach((line: string) => {
+      const card = new Card();
       line = line.replace(/\s+/, ' ').trim(); // remove unneccesary spaces
-      const lineSplit = line.split('\s');
+      const lineSplit = line.split(new RegExp('(?<=\\d)\\s'));
       if (lineSplit.length > 1) {
-        this.getCard(lineSplit, main);
+        // this.getCard(lineSplit, main);
+        card.name = lineSplit[1];
+        card.amount = +lineSplit[0].replace('x', '');
+        card.main = main;
       } else {
         main = false;
       }
+      cards.push(card);
     });
+    return cards;
   }
 
   private getCard(lineSplit: string[], main: boolean): void {

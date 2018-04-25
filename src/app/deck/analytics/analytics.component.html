@@ -1,0 +1,7 @@
+<mat-card-content fxLayout="column">
+  <mat-card-title>{{deck.name}}</mat-card-title>
+  <mat-card-content>
+    <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" 
+      [chartType]="chartType" (chartHover)="chartHover()" (chartClick)="chartClick()"></canvas>
+  </mat-card-content>
+</mat-card-content>

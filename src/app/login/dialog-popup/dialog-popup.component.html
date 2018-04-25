@@ -3,5 +3,5 @@
   <mat-form-field>
     <input matInput type="email" placeholder="Enter Email" [(ngModel)]="email" [formControl]="resetForm">
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="resetPassword()" [disabled]="!resetForm.valid">Reset</button>
+  <button mat-raised-button color="primary" (click)="reset()" [disabled]="!resetForm.valid">Reset</button>
 </mat-card-content>

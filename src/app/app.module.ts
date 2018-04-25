@@ -14,6 +14,7 @@ import { MaterialModule } from './material.module';
 import { OverviewModule } from './overview/overview.module';
 import { FireService, LoginService, AuthService, FormService, LoginAuthService, CardService } from './services/index.service';
 import { LoginModule } from './login/login.module';
+import { BracketModule } from './bracket/bracket.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginModule } from './login/login.module';
     AngularFirestoreModule,
     MaterialModule,
     OverviewModule,
-    LoginModule
+    LoginModule,
+    BracketModule
   ],
   providers: [AuthService, FireService, FormService, LoginService, LoginAuthService, CardService],
   bootstrap: [AppComponent]

@@ -3,13 +3,13 @@
   position: relative;
 }
 .mat-card {
-  margin: 1% !important;
+  margin: 1%;
 }
 .mat-tab-body-content {
   overflow: hidden !important;
 }
 .scrollable-content {
   overflow: auto;
-  height: 94vh;
+  height: 91vh;
   margin-top: 2%;
 }

@@ -1,0 +1,78 @@
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Deck Name" [(ngModel)]="deck.name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select matInput placeholder="Format" [(ngModel)]="deck.format">
+        <mat-option *ngFor="let f of format" [value]="f">{{f}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-content>
+      <mat-checkbox [checked]="deck.colors%2==0" (change)="updateColors(2)" class="white">White</mat-checkbox>
+      <mat-checkbox [checked]="deck.colors%3===0" (change)="updateColors(3)" class="black">Black</mat-checkbox>
+      <mat-checkbox [checked]="deck.colors%5===0" (change)="updateColors(5)" class="blue">Blue</mat-checkbox>
+      <mat-checkbox [checked]="deck.colors%7===0" (change)="updateColors(7)" class="green">Green</mat-checkbox>
+      <mat-checkbox [checked]="deck.colors%11===0" (change)="updateColors(11)" class="red">Red</mat-checkbox>
+  </mat-card-content>
+  <mat-card-content>
+    <mat-card-subtitle fxLayout="row">
+      <button mat-raised-button (click)="addMatch()" color="primary">Add Match</button>
+    </mat-card-subtitle>
+    <mat-accordion *ngIf="deck.matches">
+      <mat-expansion-panel *ngFor="let match of deck.matches; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{match.name}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card-content>
+          <mat-form-field>
+            <input matInput placeholder="Opponent's Deck" [(ngModel)]="match.name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Location" [(ngModel)]="match.location">
+          </mat-form-field>
+          <mat-checkbox [(ngModel)]="match.competitive">Competitive</mat-checkbox>
+          <mat-form-field>
+            <input matInput type="date" placeholder="Date" [(ngModel)]="match.date">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-subtitle>Games</mat-card-subtitle>
+        <mat-card-content>
+          <div class="mat-table">
+            <div class="mat-header-row">
+              <div class="mat-header-cell">Play/Draw</div>
+              <div class="mat-header-cell">Result</div>
+              <div class="mat-header-cell">Remove</div>
+            </div>
+            <div class="mat-row" *ngFor="let game of match.games; let j = index">
+              <div class="mat-cell">
+                <mat-radio-group [(ngModel)]="game.type">
+                  <mat-radio-button value="1">Play</mat-radio-button>
+                  <mat-radio-button value="0">Draw</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="mat-cell">
+                <mat-radio-group [(ngModel)]="game.result">
+                  <mat-radio-button value="1">Win</mat-radio-button>
+                  <mat-radio-button value="0">Loss</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="mat-cell">
+                <button mat-icon-button (click)="removeGame(i, j)"><mat-icon color="warn">remove</mat-icon></button>
+              </div>
+            </div>
+          </div>
+          <button mat-icon-button (click)="addGame(i)"><mat-icon color="primary">add_circle</mat-icon></button>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-form-field>
+            <mat-card-subtitle>Notes</mat-card-subtitle>
+            <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="5" [(ngModel)]="match.notes"></textarea>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+  <mat-card-subtitle>
+    <button mat-raised-button color="primary" (click)="update()">Update</button>
+  </mat-card-subtitle>

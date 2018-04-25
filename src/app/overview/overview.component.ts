@@ -16,7 +16,8 @@ export class OverviewComponent implements OnInit {
   decks: Deck[];
 
   newDeck(): void {
-    this.decks.push(new Deck());
+    this.fire.currentDeck.next(new Deck());
+    this.router.navigateByUrl('deck/new');
   }
 
   chooseDeck(d: Deck): void {

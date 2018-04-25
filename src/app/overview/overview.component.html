@@ -1,46 +1,46 @@
-<mat-card>
-  <mat-card-title>Overview</mat-card-title>
-  <mat-card-subtitle>Select a deck to view match analysis</mat-card-subtitle>
-  <mat-card-content>
-    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
-      <ng-container matColumnDef="Deck">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Deck</mat-header-cell>
-        <mat-cell *matCellDef="let element"><a (click)="chooseDeck(element)">{{element.name}}</a></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Format">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Format</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.format}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Wins">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>% Wins</mat-header-cell>
-        <mat-cell *matCellDef="let element" [innerHTML]="(element.winsPlay + element.winsDraw) / element.games * 100 | number"></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Win on Draw">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>% Wins on Draw</mat-header-cell>
-        <mat-cell *matCellDef="let element" [innerHTML]="element.winsDraw / element.games * 100 | number"></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Win on Play">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>% Wins on Play</mat-header-cell>
-        <mat-cell *matCellDef="let element" [innerHTML]="element.winsPlay / element.games * 100 | number"></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Total Games">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Total Games</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.games}}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="headerCol"></mat-header-row>
-    	<mat-row *matRowDef="let row; columns: headerCol;"></mat-row>
-    </mat-table>
-    <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]"
-                 [showFirstLastButtons]="true">
-  </mat-paginator>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="newDeck()">Add Deck</button>
-  </mat-card-actions>
-</mat-card>
-<!-- <mat-card *ngIf="selectedDeck">
-  <app-deck [deck]="selectedDeck"></app-deck>
-</mat-card> -->
+<div fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
+  <mat-card *ngIf="decks"><app-overview-analytics></app-overview-analytics></mat-card>
+  <mat-card>
+    <mat-card-title>Overview</mat-card-title>
+    <mat-card-subtitle>Select a deck to view match analysis</mat-card-subtitle>
+    <mat-card-content>
+      <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="table">
+        <ng-container matColumnDef="Deck">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Deck</mat-header-cell>
+          <mat-cell *matCellDef="let element"><a (click)="chooseDeck(element)">{{element.name}}</a></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Format">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Format</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.format}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Wins">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>% Wins</mat-header-cell>
+          <mat-cell *matCellDef="let element" [innerHTML]="(element.winsPlay + element.winsDraw) / element.games * 100 | number"></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Win on Draw">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>% Wins on Draw</mat-header-cell>
+          <mat-cell *matCellDef="let element" [innerHTML]="element.winsDraw / element.games * 100 | number"></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Win on Play">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>% Wins on Play</mat-header-cell>
+          <mat-cell *matCellDef="let element" [innerHTML]="element.winsPlay / element.games * 100 | number"></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Total Games">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Total Games</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.games}}</mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="headerCol"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: headerCol;"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator
+                    [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 20]"
+                    [showFirstLastButtons]="true">
+    </mat-paginator>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="newDeck()">Add Deck</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

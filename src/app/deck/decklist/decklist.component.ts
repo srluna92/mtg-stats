@@ -3,6 +3,7 @@ import { FireService } from '../../services/fire.service';
 import { CardService } from '../../services/card.service';
 import { Card } from '../../models';
 import { forEach } from '@firebase/util';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-decklist',
@@ -12,6 +13,7 @@ import { forEach } from '@firebase/util';
 export class DecklistComponent implements OnInit {
 
   @Input() deckList: Card[];
+  dL = new BehaviorSubject<string>('');
   sort: string;
 
   sortDeck(): void {
@@ -51,13 +53,14 @@ export class DecklistComponent implements OnInit {
   addDeck(e: any) {
     if (e && e.target && e.target.files[0]) {
       const fr = new FileReader();
-      let dL: any;
+      const d = new BehaviorSubject<string>('');
       fr.onload = function(ie: any) {
-        dL = ie.target.result;
+        d.next(ie.target.result);
       };
+      d.asObservable().subscribe(s => this.dL.next(s));
       fr.readAsText(e.target.files[0]);
-      this.fire.cards.asObservable().subscribe(cA => this.deckList = cA);
-      this.cardService.getCards(dL);
+      // this.fire.cards.asObservable().subscribe(cA => this.deckList = cA);
+      // this.cardService.getCards(dL);
     }
   }
   constructor(
@@ -66,36 +69,13 @@ export class DecklistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.deckList = this.deckList ? this.deckList : [{
-      amount: 1,
-      name: 'Black Lotus',
-      img: null,
-      type: 'artifact',
-      cmc: '0',
-      colors: ['colorless'],
-      main: true,
-      errorCode: null,
-      errorMessage: null
-    }, {
-      amount: 1,
-      name: 'Squee',
-      img: null,
-      type: 'creature',
-      cmc: '3',
-      colors: ['red'],
-      main: false,
-      errorCode: null,
-      errorMessage: null
-    }, {
-      amount: 1,
-      name: 'Squee',
-      img: null,
-      type: 'creature',
-      cmc: '3',
-      colors: ['red'],
-      main: true,
-      errorCode: null,
-      errorMessage: null
-    }];
+    this.dL.asObservable().subscribe(dL => {
+      if (dL) {
+        this.deckList = this.cardService.getCards(dL);
+        const cD = this.fire.currentDeck.getValue();
+        cD.deckList = this.deckList;
+        this.fire.currentDeck.next(cD);
+      }
+    });
   }
 }

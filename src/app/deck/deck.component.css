@@ -7,3 +7,6 @@
 .mat-cell {
   overflow: visible;
 }
+.mat-card:first-child {
+  margin-top: 1% !important;
+}
