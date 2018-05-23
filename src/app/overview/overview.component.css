@@ -13,3 +13,6 @@
 .table {
   overflow: auto;
 }
+.name {
+  cursor: pointer;
+}

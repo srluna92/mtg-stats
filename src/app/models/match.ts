@@ -10,6 +10,7 @@ export class Match {
   location: string;
   date: string;
   competitve: boolean;
+  oppColors: number;
 
   constructor(name?: string, game?: Game[]) {
     this.name = name ? name : this.name;

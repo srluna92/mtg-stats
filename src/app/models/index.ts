@@ -4,3 +4,4 @@ export * from './game';
 export * from './match';
 export * from './user';
 export * from './bracket';
+export * from './settings';

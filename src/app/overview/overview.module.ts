@@ -6,6 +6,7 @@ import { OverviewComponent } from './overview.component';
 import { MaterialModule } from '../material.module';
 import { DeckModule } from '../deck/deck.module';
 import { OverviewAnalyticsModule } from './overview-analytics/overview-analytics.module';
+import { PipeModule } from '../pipes/pipe.module';
 
 @NgModule({
   imports: [
@@ -15,9 +16,10 @@ import { OverviewAnalyticsModule } from './overview-analytics/overview-analytics
     BrowserAnimationsModule,
     MaterialModule,
     DeckModule,
-    OverviewAnalyticsModule
+    OverviewAnalyticsModule,
+    PipeModule
   ],
   declarations: [OverviewComponent],
-  exports: [OverviewComponent]
+  exports: [OverviewComponent],
 })
 export class OverviewModule { }

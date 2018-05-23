@@ -2,16 +2,20 @@ import { Route } from '@angular/router';
 import { OverviewRoute } from './overview/overview.route';
 import { LoginRoute } from './login/login.route';
 import { DeckRoute } from './deck/deck.route';
-import { BracketRoute } from './bracket/bracket.route';
+import { HomeRoute } from './home/home.route';
+import { SettingsRoute } from './settings/settings.route';
+import { FeedbackRoute } from './feedback/feedback.route';
 
 export const routes: Route[] = [
   ...OverviewRoute,
   ...LoginRoute,
   ...DeckRoute,
-  ...BracketRoute,
+  ...HomeRoute,
+  ...SettingsRoute,
+  ...FeedbackRoute,
   {
     path: '**',
-    redirectTo: 'overview',
+    redirectTo: 'main',
     pathMatch: 'full'
   }
 ];

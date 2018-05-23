@@ -11,7 +11,7 @@ export class LoginAuthService implements CanActivate {
     return new Observable<boolean> (obs => {
       this.loginService.user.asObservable().subscribe(u => {
         if (u && u.email) {
-          this.router.navigateByUrl('overview');
+          this.router.navigateByUrl('main');
         }
         return obs.next(!(u && u.email));
       });

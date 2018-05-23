@@ -14,11 +14,13 @@ import { MaterialModule } from './material.module';
 import { OverviewModule } from './overview/overview.module';
 import { FireService, LoginService, AuthService, FormService, LoginAuthService, CardService } from './services/index.service';
 import { LoginModule } from './login/login.module';
-import { BracketModule } from './bracket/bracket.module';
+import { HomeModule } from './home/home.module';
+import { SettingsModule } from './settings/settings.module';
+import { FeedbackModule } from './feedback/feedback.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,9 @@ import { BracketModule } from './bracket/bracket.module';
     MaterialModule,
     OverviewModule,
     LoginModule,
-    BracketModule
+    HomeModule,
+    SettingsModule,
+    FeedbackModule
   ],
   providers: [AuthService, FireService, FormService, LoginService, LoginAuthService, CardService],
   bootstrap: [AppComponent]

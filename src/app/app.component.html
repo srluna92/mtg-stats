@@ -1,8 +1,7 @@
 <div fxLayout="column">
 <mat-toolbar color="primary" class="mat-elevation-z6">
-  <mat-card-title>MtgStats<span class="beta">Beta</span></mat-card-title>
+  <mat-card-title routerLink="/">MtgStats<span class="beta">Beta</span></mat-card-title>
   <div fxFlex></div>
-  <button mat-button routerLink="/overview" *ngIf="user">Overview</button>
   <button mat-button (click)="logout()" *ngIf="user">Logout</button>
 </mat-toolbar>
 <div class="scrollable-content">

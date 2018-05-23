@@ -49,6 +49,14 @@ export class MatchesComponent implements OnInit {
       this.deck.colors = c;
     }
   }
+  updateOppColors(i: number, c: number): void {
+    if (this.deck.matches[i].oppColors) {
+      this.deck.matches[i].oppColors = this.deck.matches[i].oppColors % c === 0
+        ? this.deck.matches[i].oppColors / c : this.deck.matches[i].oppColors * c;
+    } else {
+      this.deck.matches[i].oppColors = c;
+    }
+  }
   ngOnInit() {
     this.fire.format.asObservable().subscribe(f => this.format = f);
   }

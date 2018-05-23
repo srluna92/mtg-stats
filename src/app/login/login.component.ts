@@ -14,21 +14,22 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   loginControl: FormGroup;
+  registerControl: FormGroup;
   error: string;
 
   login() {
     this.loginService.login(this.username, this.password).then((e: any) => {
-      this.error = e && e.value ? e.value.message : '';
+      this.error = e && e.value ? e.value.message : 'An error occurred. Please Try again later.';
     });
   }
   signIn() {
     this.loginService.signUp(this.username, this.password).then((e: any) => {
-      this.error = e.value.message;
+      this.error = e && e.value ? e.value.message : 'An error occurred. Please Try again later.';
     });
   }
   popUpSignIn(s: string) {
     this.loginService.loginPopup(s).then((e: any) => {
-      this.error = e.value.message;
+      this.error = e && e.value ? e.value.message : 'An error occurred. Please Try again later.';
     });
   }
   forgotPassword(): void {
@@ -44,5 +45,6 @@ export class LoginComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.loginControl = this.formService.loginForm();
+    this.registerControl = this.formService.registerForm();
   }
 }

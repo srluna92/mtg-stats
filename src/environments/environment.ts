@@ -12,5 +12,6 @@ export const environment = {
     projectId: 'mtg-stats',
     storageBucket: '',
     messagingSenderId: '67448617703'
-  }
+  },
+  modulo: [100000000, 81654329, 43349769]
 };

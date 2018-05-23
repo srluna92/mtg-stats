@@ -17,7 +17,6 @@ export class FeedbackComponent implements OnInit {
   }
 
   constructor(
-    public dialogReg: MatDialogRef<AppComponent>,
     private fire: FireService,
     private formService: FormService
   ) { }

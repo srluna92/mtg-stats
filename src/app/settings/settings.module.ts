@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material.module';
-import { FeedbackComponent } from './feedback.component';
+import { SettingsComponent } from './settings.component';
+import { PipeModule } from '../pipes/pipe.module';
 
 @NgModule({
   imports: [
@@ -12,8 +13,9 @@ import { FeedbackComponent } from './feedback.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    PipeModule
   ],
-  declarations: [FeedbackComponent],
-  exports: [FeedbackComponent]
+  declarations: [SettingsComponent],
+  exports: [SettingsComponent]
 })
-export class FeedbackModule { }
+export class SettingsModule { }

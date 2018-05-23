@@ -3,3 +3,14 @@
 .mat-tab-body-content {overflow: hidden !important;}
 .scrollable-content {  overflow: auto;height: 91vh;}
 .beta {vertical-align: super;font-size: 40%;}
+
+.fs-40 {
+  font-size: 40px;
+}
+
+.mat-card-content>:last-child:not(.mat-card-footer) {
+  margin-bottom: 1% !important;
+}
+.mat-card-content>:first-child, .mat-card>:first-child {
+  margin-top: 1% !important;
+}

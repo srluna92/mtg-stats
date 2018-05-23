@@ -3,6 +3,8 @@ import { FireService } from '../services/index.service';
 import { MatTableDataSource, Sort, MatSort, MatPaginator } from '@angular/material';
 import { Deck } from '../models/deck';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { Settings } from '../models';
 
 @Component({
   selector: 'app-overview',
@@ -14,10 +16,13 @@ export class OverviewComponent implements OnInit {
   headerCol = ['Deck', 'Format', 'Wins', 'Win on Draw', 'Win on Play', 'Total Games'];
   dataSource = new MatTableDataSource<Deck>(null);
   decks: Deck[];
+  s: Settings;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   newDeck(): void {
-    this.fire.currentDeck.next(new Deck());
+    let id = this.decks.length > 0 ? +this.decks[this.decks.length - 1].id : 1;
+    id = id ? ((id * environment.modulo[2]) % environment.modulo[0]) + 1 : id;
+    this.fire.currentDeck.next(new Deck(id));
     this.router.navigateByUrl('deck/new');
   }
 
@@ -54,8 +59,10 @@ export class OverviewComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.decks = d;
     });
+    this.fire.settings.asObservable().subscribe(set => this.s = set);
     this.fire.retrieveDecks();
     this.fire.retrieveFormat();
+    this.fire.retrieveSettings();
   }
 
 }
