@@ -20,9 +20,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loginService.user.asObservable().subscribe(u => {
-      this.user = u;
-    });
     this.loginService.authUser();
   }
 }

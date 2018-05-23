@@ -1,0 +1,7 @@
+<mat-card-content>
+  Something not working? Have an improvement in mind? Let me know!
+  <mat-form-field>
+    <textarea matInput placeholder="Feedback" [(ngModel)]="message"></textarea>
+  </mat-form-field>
+  <button mat-button (click)="send()" [disabled]="!message">Send</button>
+</mat-card-content>

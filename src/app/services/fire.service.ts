@@ -51,6 +51,10 @@ export class FireService {
   updateCards(): void {
     this.fire.collection('cards').add(this.cards.getValue());
   }
+  sendFeedback(message: string): void {
+    const data = {message: message, user: this.loginService.user.getValue().email};
+    this.fire.collection('feedback').add({data: data});
+  }
   constructor(
     private fire: AngularFirestore,
     private loginService: LoginService

@@ -19,7 +19,7 @@
         </mat-error>
       </mat-form-field>
     </mat-card-content>
-    <mat-card-content *ngIf="error" fxLayout="row"><mat-error>{{error}}</mat-error></mat-card-content>
+    <mat-card-content *ngIf="error" fxLayout="row"><mat-error [innerHTML]="error"></mat-error></mat-card-content>
     <mat-card-actions fxLayout="row">
       <button mat-raised-button color="primary" (click)="login()" [disabled]="!loginControl.valid">Login</button>
       <button mat-raised-button color="warn" (click)="signIn()" [disabled]="!loginControl.valid">Register</button>
@@ -28,7 +28,7 @@
       Sign in with Google
     </mat-card-content> -->
     <mat-card-content fxLayout="row">
-      <a (click)="forgotPassword()">Forgot Password</a>
+      <button mat-button (click)="forgotPassword()">Forgot Password</button>
     </mat-card-content>
   </mat-card-content>
 </mat-card>

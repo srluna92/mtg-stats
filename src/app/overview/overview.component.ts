@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FireService } from '../services/index.service';
-import { MatTableDataSource, Sort, MatSort } from '@angular/material';
+import { MatTableDataSource, Sort, MatSort, MatPaginator } from '@angular/material';
 import { Deck } from '../models/deck';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class OverviewComponent implements OnInit {
   headerCol = ['Deck', 'Format', 'Wins', 'Win on Draw', 'Win on Play', 'Total Games'];
   dataSource = new MatTableDataSource<Deck>(null);
   decks: Deck[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   newDeck(): void {
     this.fire.currentDeck.next(new Deck());
@@ -39,7 +40,7 @@ export class OverviewComponent implements OnInit {
         default: return 0;
       }
     });
-    this.dataSource = new MatTableDataSource<Deck>(data);
+    this.dataSource.data = data;
   }
 
   constructor(
@@ -50,6 +51,7 @@ export class OverviewComponent implements OnInit {
   ngOnInit() {
     this.fire.decks.asObservable().subscribe(d => {
       this.dataSource = new MatTableDataSource<Deck>(d);
+      this.dataSource.paginator = this.paginator;
       this.decks = d;
     });
     this.fire.retrieveDecks();

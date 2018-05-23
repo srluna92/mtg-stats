@@ -1,35 +1,20 @@
-<mat-card-title *ngIf="deckList">View Deck List</mat-card-title>
-<mat-card-title *ngIf="!deckList">Add Deck List</mat-card-title>
-<mat-card-content *ngIf="deckList">
-  <mat-card-subtitle>Sort By</mat-card-subtitle>
-  <mat-card-content>
-    <mat-radio-group [(ngModel)]="sort" (ngModelChange)="sortDeck()">
-      <mat-radio-button value="name">Name</mat-radio-button>
-      <mat-radio-button value="cmc">CMC</mat-radio-button>
-      <mat-radio-button value="type">Type</mat-radio-button>
-      <mat-radio-button value="color">Color</mat-radio-button>
-    </mat-radio-group>
-  </mat-card-content>
+<mat-card-title *ngIf="deck.deckList">View Deck List</mat-card-title>
+<mat-card-title *ngIf="!deck.deckList">Add Deck List</mat-card-title>
+<mat-card-content *ngIf="deck.deckList">
   <mat-card-content>
     <mat-card-subtitle>Main Board</mat-card-subtitle>
-    <mat-card-content *ngFor="let card of deckList" class="deckList">
-      <div *ngIf="card.main">
-        <div [innerHTML]="card.amount"></div>
-        <div *ngIf="card.img"><span matTooltip="c.img" matTooltipShowDisplay="500" [innerHTML]="card.name"></span></div>
-        <div *ngIf="!card.img" [innerHTML]="card.name"></div>
-      </div>
+    <mat-card-content *ngFor="let card of mainList" class="deckList">
+      <div [innerHTML]="card.amount"></div>
+      <div *ngIf="card.img"><span matTooltip="card.img" matTooltipShowDisplay="500" [innerHTML]="card.name"></span></div>
+      <div *ngIf="!card.img" [innerHTML]="card.name"></div>
     </mat-card-content>
   </mat-card-content>
   <mat-card-content>
     <mat-card-subtitle>Side Board</mat-card-subtitle>
-    <mat-card-content *ngFor="let card of deckList">
-      <mat-card-content *ngFor="let card of deckList" class="deckList">
-        <div *ngIf="!card.main">
-          <div [innerHTML]="card.amount"></div>
-          <div *ngIf="card.img"><span matTooltip="c.img" matTooltipShowDisplay="500" [innerHTML]="card.name"></span></div>
-          <div *ngIf="!card.img" [innerHTML]="card.name"></div>
-        </div>
-      </mat-card-content>
+    <mat-card-content *ngFor="let card of sideBoard" class="deckList">
+      <div [innerHTML]="card.amount"></div>
+      <div *ngIf="card.img"><span matTooltip="card.img" matTooltipShowDisplay="500" [innerHTML]="card.name"></span></div>
+      <div *ngIf="!card.img" [innerHTML]="card.name"></div>
     </mat-card-content>
   </mat-card-content>
 </mat-card-content>
